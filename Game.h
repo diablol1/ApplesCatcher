@@ -2,6 +2,8 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "Player.h"
+
 class Game
 {
 public:
@@ -14,5 +16,10 @@ public:
 	void processEvents();
 	void update();
 	void render();
+private:
+	Player player;
+	sf::Texture playerTexture;
+
+	void loadTextures();
 };
 
