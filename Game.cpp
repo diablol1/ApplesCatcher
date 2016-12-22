@@ -19,7 +19,15 @@ void Game::start()
 
 void Game::processEvents()
 {
-
+	sf::Event event;
+	while (window.pollEvent(event))
+	{
+		if (event.type == sf::Event::Closed)
+		{
+			window.close();
+			break;
+		}
+	}
 }
 void Game::update()
 {
