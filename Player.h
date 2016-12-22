@@ -5,8 +5,6 @@ class Player : public sf::Drawable, public sf::Transformable
 {
 public:
 
-	static sf::Texture texture;
-
 	Player(const sf::Texture &texture);
 	Player() {}
 
@@ -16,6 +14,7 @@ private:
 		states.transform *= getTransform();
 		target.draw(sprite, states);
 	}
+
 	sf::Sprite sprite;
 };
 

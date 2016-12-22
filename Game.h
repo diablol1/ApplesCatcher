@@ -7,19 +7,19 @@
 class Game
 {
 public:
-
-	sf::RenderWindow window;
-
 	Game();
 	void start();
 
-	void processEvents();
-	void update();
-	void render();
 private:
+	sf::RenderWindow window;
+
 	Player player;
 	sf::Texture playerTexture;
 
 	void loadTextures();
+
+	void processEvents();
+	void update();
+	void render();
 };
 

@@ -1,7 +1,6 @@
 #include "Game.h"
 
 
-
 Game::Game() : window(sf::VideoMode(800, 600), "Apples Catcher")
 {
 	window.setFramerateLimit(60);
@@ -31,6 +30,7 @@ void Game::processEvents()
 		}
 	}
 }
+
 void Game::update()
 {
 
