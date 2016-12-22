@@ -5,7 +5,7 @@ class Player : public sf::Drawable, public sf::Transformable
 {
 public:
 
-	Player(const sf::Texture &texture);
+	Player(const sf::Texture &texture, const sf::Vector2f &position);
 	Player() {}
 
 private:

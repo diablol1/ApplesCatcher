@@ -11,6 +11,7 @@ public:
 	void start();
 
 private:
+	static const sf::Vector2i ScreenResolution;
 	sf::RenderWindow window;
 
 	Player player;

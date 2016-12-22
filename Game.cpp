@@ -1,11 +1,12 @@
 #include "Game.h"
 
+const sf::Vector2i Game::ScreenResolution = sf::Vector2i(800, 600);
 
-Game::Game() : window(sf::VideoMode(800, 600), "Apples Catcher")
+Game::Game() : window(sf::VideoMode(ScreenResolution.x, ScreenResolution.y), "Apples Catcher")
 {
 	window.setFramerateLimit(60);
 	loadTextures();
-	player = Player(playerTexture);
+	player = Player(playerTexture, sf::Vector2f(ScreenResolution.x / 2, ScreenResolution.y - playerTexture.getSize().y));
 }
 
 void Game::start()
