@@ -20,7 +20,7 @@ private:
 	void loadTextures();
 
 	void processEvents();
-	void update();
+	void update(const float &deltaTime);
 	void render();
 };
 

@@ -4,17 +4,20 @@ const sf::Vector2i Game::ScreenResolution = sf::Vector2i(800, 600);
 
 Game::Game() : window(sf::VideoMode(ScreenResolution.x, ScreenResolution.y), "Apples Catcher")
 {
-	window.setFramerateLimit(60);
 	loadTextures();
 	player = Player(playerTexture, sf::Vector2f(ScreenResolution.x / 2, ScreenResolution.y - playerTexture.getSize().y));
 }
 
 void Game::start()
 {
+	sf::Clock clock;
 	while (window.isOpen())
 	{
 		processEvents();
-		update();
+		//TODO: Hmm, Maybe I should change this to miliseconds for better collison precision...
+		float deltaTime = clock.getElapsedTime().asSeconds();
+		update(deltaTime);
+		clock.restart();
 		render();
 	}
 }
@@ -32,9 +35,9 @@ void Game::processEvents()
 	}
 }
 
-void Game::update()
+void Game::update(const float &deltaTime)
 {
-
+	player.move(deltaTime);
 }
 void Game::render()
 {
