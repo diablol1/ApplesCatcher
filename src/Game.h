@@ -25,6 +25,8 @@ private:
 	
 	void processEvents();
 	void update(const float &deltaTime);
+	void detectCollisions();
+	bool isCollision(const sf::FloatRect &rect1, const sf::FloatRect &rect2);
 	void render();
 };
 

@@ -19,9 +19,9 @@ void Game::loadTextures()
 
 void Game::initWalls()
 {
-	walls["leftWall"].setSize(sf::Vector2f(30, ScreenResolution.y));
-	walls["rightWall"].setSize(sf::Vector2f(30, ScreenResolution.y));
-	walls["bottomWall"].setSize(sf::Vector2f(ScreenResolution.x, 30));
+	walls["leftWall"].setSize(sf::Vector2f(30, static_cast<float>(ScreenResolution.y)));
+	walls["rightWall"].setSize(sf::Vector2f(30, static_cast<float>(ScreenResolution.y)));
+	walls["bottomWall"].setSize(sf::Vector2f(static_cast<float>(ScreenResolution.x), 30));
 
 	walls["leftWall"].setPosition(0, 0);
 	walls["rightWall"].setPosition(ScreenResolution.x - walls["rightWall"].getSize().x, 0);
@@ -64,7 +64,31 @@ void Game::processEvents()
 void Game::update(const float &deltaTime)
 {
 	player.move(deltaTime);
+	detectCollisions();
 }
+
+void Game::detectCollisions()
+{
+	if (isCollision(player.getGlobalBounds(), walls["leftWall"].getGlobalBounds()))
+	{
+		player.collisionDirection = cd::CollisionDirections::LEFT;
+	}
+	else if (isCollision(player.getGlobalBounds(), walls["rightWall"].getGlobalBounds()))
+	{
+		player.collisionDirection = cd::CollisionDirections::RIGHT;
+	}
+	else
+		player.collisionDirection = cd::CollisionDirections::ANY;
+}
+
+bool Game::isCollision(const sf::FloatRect& rect1, const sf::FloatRect& rect2)
+{
+	if (rect1.intersects(rect2))
+		return true;
+	else
+		return false;
+}
+
 void Game::render()
 {
 	window.clear();
