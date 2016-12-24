@@ -1,6 +1,6 @@
 #include "Game.h"
 
-const sf::Vector2i Game::ScreenResolution = sf::Vector2i(800, 600);
+const sf::Vector2i Game::ScreenResolution = sf::Vector2i(1200, 800);
 
 Game::Game() : window(sf::VideoMode(ScreenResolution.x, ScreenResolution.y), "Apples Catcher")
 {
@@ -8,13 +8,15 @@ Game::Game() : window(sf::VideoMode(ScreenResolution.x, ScreenResolution.y), "Ap
 
 	loadTextures();
 	player = Player(playerTexture, sf::Vector2f(ScreenResolution.x / 2,
-		ScreenResolution.y - playerTexture.getSize().y - walls["bottomWall"].getSize().y));
+		static_cast<float>(ScreenResolution.y) - playerTexture.getSize().y - walls["bottomWall"].getSize().y));
+
+	apples.push_back(Apple(appleTexture, sf::Vector2f(90, 90)));
 }
 
 void Game::loadTextures()
 {
-	if (!playerTexture.loadFromFile("sprites/tmpPlayer.png"))
-		printf("Encountered error while loading texture.");
+	playerTexture.loadFromFile("sprites/tmpPlayer.png");
+	appleTexture.loadFromFile("sprites/tmpApple.png");
 }
 
 void Game::initWalls()
@@ -98,6 +100,16 @@ void Game::render()
 	{
 		window.draw(wall.second);
 	}
+	for (auto &apple : apples)
+	{
+		window.draw(apple);
+	}
 	
 	window.display();
+}
+
+sf::Vector2f Game::drawApplePosition()
+{
+	//Resursion if(position collide It call again and again... if it doesn't collide it return what it should hmm )
+	return sf::Vector2f();
 }
