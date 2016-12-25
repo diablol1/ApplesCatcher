@@ -10,7 +10,7 @@ Game::Game() : window(sf::VideoMode(ScreenResolution.x, ScreenResolution.y), "Ap
 	player = Player(playerTexture, sf::Vector2f(ScreenResolution.x / 2,
 		static_cast<float>(ScreenResolution.y) - playerTexture.getSize().y - walls["bottomWall"].getSize().y));
 
-	apples.push_back(Apple(appleTexture, sf::Vector2f(90, 90)));
+	apples.push_back (Apple (appleTexture, sf::Vector2f(90, 90)));
 }
 
 void Game::loadTextures()
@@ -66,6 +66,10 @@ void Game::processEvents()
 void Game::update(const float &deltaTime)
 {
 	player.move(deltaTime);
+	for (auto &apple : apples)
+	{
+		apple.move(deltaTime);
+	}
 	detectCollisions();
 }
 
@@ -106,10 +110,4 @@ void Game::render()
 	}
 	
 	window.display();
-}
-
-sf::Vector2f Game::drawApplePosition()
-{
-	//Resursion if(position collide It call again and again... if it doesn't collide it return what it should hmm )
-	return sf::Vector2f();
 }

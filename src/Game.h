@@ -35,7 +35,5 @@ private:
 	void detectCollisions();
 	bool isCollision(const sf::FloatRect &rect1, const sf::FloatRect &rect2);
 	void render();
-
-	sf::Vector2f drawApplePosition(); //Soon
 };
 
