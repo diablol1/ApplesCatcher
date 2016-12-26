@@ -33,5 +33,7 @@ private:
 	void detectCollisions();
 	bool isCollision(const sf::FloatRect& rect1, const sf::FloatRect& rect2) const;
 	void render();
+
+	void reset();
 };
 

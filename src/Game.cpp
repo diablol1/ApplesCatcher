@@ -1,15 +1,14 @@
 #include "Game.h"
-
+#include <iostream>
 
 Game::Game() : window(sf::VideoMode(1280, 800), "Apples Catcher")
 {
-	initWalls();
-
 	loadTextures();
-	player = Player(playerTexture, sf::Vector2f(window.getSize().x / 2,
-		static_cast<float>(window.getSize().y) - playerTexture.getSize().y - walls["bottomWall"].getSize().y));
 
-	apples.push_back (Apple (appleTexture, sf::Vector2f(90, 90)));
+	initWalls();
+	reset();
+
+	apples.push_back(Apple(appleTexture, sf::Vector2f(90, 90)));
 }
 
 void Game::loadTextures()
@@ -20,9 +19,9 @@ void Game::loadTextures()
 
 void Game::initWalls()
 {
-	walls["leftWall"].setSize (sf::Vector2f (30, static_cast<float> (window.getSize().y)));
-	walls["rightWall"].setSize (sf::Vector2f (30, static_cast<float> (window.getSize().y)));
-	walls["bottomWall"].setSize (sf::Vector2f (static_cast<float> (window.getSize().x), 30));
+	walls["leftWall"].setSize(sf::Vector2f(30, static_cast<float> (window.getSize().y)));
+	walls["rightWall"].setSize(sf::Vector2f(30, static_cast<float> (window.getSize().y)));
+	walls["bottomWall"].setSize(sf::Vector2f(static_cast<float> (window.getSize().x), 30));
 
 	walls["leftWall"].setPosition(0, 0);
 	walls["rightWall"].setPosition(window.getSize().x - walls["rightWall"].getSize().x, 0);
@@ -84,6 +83,15 @@ void Game::detectCollisions()
 	}
 	else
 		player.collisionDirection = cd::CollisionDirections::ANY;
+
+	for (auto const& apple : apples)
+	{
+		if (isCollision (walls["bottomWall"].getGlobalBounds(), apple.getGlobalBounds ())) //Check game over
+		{
+			reset();
+			break;
+		}
+	}
 }
 
 bool Game::isCollision(const sf::FloatRect& rect1, const sf::FloatRect& rect2) const
@@ -109,4 +117,13 @@ void Game::render()
 	}
 	
 	window.display();
+}
+
+void Game::reset()
+{
+	if(apples.size() > 0)
+		apples.clear();
+
+	player = Player(playerTexture, sf::Vector2f(window.getSize().x / 2,
+		static_cast<float>(window.getSize().y) - playerTexture.getSize().y - walls["bottomWall"].getSize().y));
 }

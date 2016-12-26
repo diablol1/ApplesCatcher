@@ -10,6 +10,10 @@ public:
 	void move(const float& deltaTime) {
 		sprite.move(0, gravity * deltaTime);
 	}
+
+	sf::FloatRect getGlobalBounds() const {
+		return sprite.getGlobalBounds();
+	}
 private:
 	sf::Sprite sprite;
 	const int gravity;
