@@ -1,9 +1,10 @@
 #include "Game.h"
 #include <iostream>
 
-Game::Game() : window(sf::VideoMode(1280, 800), "Apples Catcher")
+Game::Game() : window(sf::VideoMode(800, 600), "Apples Catcher")
 {
 	loadTextures();
+	background.setTexture(backgroundTexture);
 
 	initWalls();
 	reset();
@@ -13,8 +14,10 @@ Game::Game() : window(sf::VideoMode(1280, 800), "Apples Catcher")
 
 void Game::loadTextures()
 {
-	playerTexture.loadFromFile("sprites/tmpPlayer.png");
-	appleTexture.loadFromFile("sprites/tmpApple.png");
+	playerTexture.loadFromFile("sprites/hat.png");
+	appleTexture.loadFromFile("sprites/apple.png");
+	backgroundTexture.loadFromFile("sprites/background.png");
+	wallTexture.loadFromFile("sprites/wall.jpg");
 }
 
 void Game::initWalls()
@@ -29,7 +32,7 @@ void Game::initWalls()
 
 	for (auto &wall : walls)
 	{
-		wall.second.setFillColor(sf::Color::Magenta);
+		wall.second.setTexture(&wallTexture);
 	}
 }
 
@@ -106,11 +109,12 @@ void Game::render()
 {
 	window.clear();
 
+	window.draw(background);
 	window.draw(player);
 	for (const auto &wall : walls)
 	{
 		window.draw(wall.second);
-	}
+	} //Wybrac czy teksturowac sciany czy dac przezroczyste.
 	for (const auto &apple : apples)
 	{
 		window.draw(apple);

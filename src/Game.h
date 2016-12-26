@@ -18,12 +18,16 @@ public:
 private:
 	sf::RenderWindow window;
 
+	sf::Sprite background;
 	std::map<std::string, sf::RectangleShape> walls;
 	std::vector<Apple>apples;
 	Player player;
 
 	sf::Texture playerTexture;
 	sf::Texture appleTexture;
+	sf::Texture backgroundTexture;
+	sf::Texture wallTexture;
+	//TODO: Add texture manager
 
 	void loadTextures();
 	void initWalls();
