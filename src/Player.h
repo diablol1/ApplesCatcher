@@ -13,7 +13,8 @@ public:
 	Player();
 	Player& operator=(const Player& object);
 
-	void move(const float &deltaTime);
+	void move(const float& deltaTime);
+
 	sf::FloatRect getGlobalBounds() const {
 		return sprite.getGlobalBounds();
 	}

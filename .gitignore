@@ -1,3 +1,5 @@
 packages.config
 Debug/
 ApplesCatcher.*
+/Release/
+/ClassDiagram.cd

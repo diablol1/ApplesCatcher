@@ -16,7 +16,6 @@ public:
 	void start();
 
 private:
-	static const sf::Vector2i ScreenResolution;
 	sf::RenderWindow window;
 
 	std::map<std::string, sf::RectangleShape> walls;
@@ -26,14 +25,13 @@ private:
 	sf::Texture playerTexture;
 	sf::Texture appleTexture;
 
-
 	void loadTextures();
 	void initWalls();
 	
 	void processEvents();
-	void update(const float &deltaTime);
+	void update(const float& deltaTime);
 	void detectCollisions();
-	bool isCollision(const sf::FloatRect &rect1, const sf::FloatRect &rect2);
+	bool isCollision(const sf::FloatRect& rect1, const sf::FloatRect& rect2) const;
 	void render();
 };
 
