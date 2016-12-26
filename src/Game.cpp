@@ -4,20 +4,20 @@
 Game::Game() : window(sf::VideoMode(800, 600), "Apples Catcher")
 {
 	loadTextures();
-	background.setTexture(backgroundTexture);
+	background.setTexture(textureManager.get("background"));
 
 	initWalls();
 	reset();
 
-	apples.push_back(Apple(appleTexture, sf::Vector2f(90, 90)));
+	apples.push_back(Apple(textureManager.get("apple"), sf::Vector2f(90, 90)));
 }
 
 void Game::loadTextures()
 {
-	playerTexture.loadFromFile("sprites/hat.png");
-	appleTexture.loadFromFile("sprites/apple.png");
-	backgroundTexture.loadFromFile("sprites/background.png");
-	wallTexture.loadFromFile("sprites/wall.jpg");
+	textureManager.add("player", "sprites/hat.png");
+	textureManager.add("apple", "sprites/apple.png");
+	textureManager.add("background", "sprites/background.png");
+	textureManager.add("wall", "sprites/wall.jpg");
 }
 
 void Game::initWalls()
@@ -32,10 +32,9 @@ void Game::initWalls()
 
 	for (auto &wall : walls)
 	{
-		wall.second.setTexture(&wallTexture);
+		wall.second.setTexture (&textureManager.get ("wall"));
 	}
 }
-
 
 void Game::start()
 {
@@ -114,7 +113,7 @@ void Game::render()
 	for (const auto &wall : walls)
 	{
 		window.draw(wall.second);
-	} //Wybrac czy teksturowac sciany czy dac przezroczyste.
+	}
 	for (const auto &apple : apples)
 	{
 		window.draw(apple);
@@ -128,6 +127,6 @@ void Game::reset()
 	if(apples.size() > 0)
 		apples.clear();
 
-	player = Player(playerTexture, sf::Vector2f(window.getSize().x / 2,
-		static_cast<float>(window.getSize().y) - playerTexture.getSize().y - walls["bottomWall"].getSize().y));
+	player = Player (textureManager.get ("player"), sf::Vector2f (window.getSize().x / 2,
+		static_cast<float> (window.getSize().y) - textureManager.get ("player").getSize().y - walls["bottomWall"].getSize().y));
 }

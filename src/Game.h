@@ -9,6 +9,9 @@
 #include "Player.h"
 #include "Apple.h"
 
+#include "TextureManager.h"
+
+
 class Game
 {
 public:
@@ -23,11 +26,7 @@ private:
 	std::vector<Apple>apples;
 	Player player;
 
-	sf::Texture playerTexture;
-	sf::Texture appleTexture;
-	sf::Texture backgroundTexture;
-	sf::Texture wallTexture;
-	//TODO: Add texture manager
+	TextureManager textureManager;
 
 	void loadTextures();
 	void initWalls();
