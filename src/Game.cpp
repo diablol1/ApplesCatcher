@@ -2,6 +2,7 @@
 #include <iostream>
 
 Game::Game() : window(sf::VideoMode(800, 600), "Apples Catcher")
+	,currentScoreLabel("SCORE: 0", 30, sf::Vector2f(5, window.getSize().y - 35))
 {
 	loadTextures();
 	background.setTexture(textureManager.get("background"));
@@ -68,12 +69,10 @@ void Game::update(const float &deltaTime)
 	static sf::Clock clock;
 	if (clock.getElapsedTime().asSeconds() >= 1)
 	{
-		if (apples.size() > 0)
+		if (!apples.empty())
 		{
 			int lastAppleGravity = apples[apples.size() - 1].gravity;
 			int nextAppleGravity;
-
-			if (lastAppleGravity < Apple::maxGravity)
 				nextAppleGravity = lastAppleGravity + 5;
 
 			apples.push_back(Apple(textureManager.get("apple"), generatePositionForApple(), nextAppleGravity));
@@ -105,12 +104,15 @@ void Game::detectCollisions()
 	else
 		player.collisionDirection = cd::CollisionDirections::ANY;
 
-	for (auto const& apple : apples)
+	if(!apples.empty())
 	{
-		if (isCollision (walls["bottomWall"].getGlobalBounds(), apple.getGlobalBounds ())) //Check game over
-		{
+		Apple oldestApple = apples[0];
+		if (isCollision(walls["bottomWall"].getGlobalBounds(), oldestApple.getGlobalBounds())) //Check game over
 			reset();
-			break;
+		else if (isCollision(player.getGlobalBounds(), oldestApple.getGlobalBounds()))
+		{
+			apples.erase(apples.begin());
+			currentScoreLabel++;
 		}
 	}
 }
@@ -137,6 +139,7 @@ void Game::render()
 	{
 		window.draw(apple);
 	}
+	window.draw(currentScoreLabel);
 	
 	window.display();
 }
@@ -176,4 +179,6 @@ void Game::reset()
 
 	player = Player (textureManager.get ("player"), sf::Vector2f (window.getSize().x / 2,
 		static_cast<float> (window.getSize().y) - textureManager.get ("player").getSize().y - walls["bottomWall"].getSize().y));
+
+	currentScoreLabel.reset();
 }

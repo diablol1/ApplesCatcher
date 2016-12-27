@@ -10,6 +10,8 @@
 #include "Player.h"
 #include "Apple.h"
 
+#include "CurrentScoreLabel.h"
+
 #include "TextureManager.h"
 
 
@@ -26,6 +28,8 @@ private:
 	std::map<std::string, sf::RectangleShape> walls;
 	std::vector<Apple>apples;
 	Player player;
+
+	CurrentScoreLabel currentScoreLabel;
 
 	TextureManager textureManager;
 

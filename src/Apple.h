@@ -6,8 +6,9 @@ class Apple : public sf::Transformable, public sf::Drawable
 {
 public:
 	const int gravity;
-	static const int maxGravity;
 	Apple(const sf::Texture& texture, const sf::Vector2f& position, const int& _gravity = 250);
+
+	Apple & operator=(const Apple & object);
 
 	void move(const float& deltaTime) {
 		sprite.move(0, gravity * deltaTime);
