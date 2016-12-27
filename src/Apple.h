@@ -5,6 +5,8 @@
 class Apple : public sf::Transformable, public sf::Drawable
 {
 public:
+	const int gravity;
+	static const int maxGravity;
 	Apple(const sf::Texture& texture, const sf::Vector2f& position, const int& _gravity = 250);
 
 	void move(const float& deltaTime) {
@@ -16,7 +18,6 @@ public:
 	}
 private:
 	sf::Sprite sprite;
-	const int gravity;
 
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const {
 		states.transform *= getTransform();

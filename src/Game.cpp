@@ -65,6 +65,25 @@ void Game::processEvents()
 
 void Game::update(const float &deltaTime)
 {
+	static sf::Clock clock;
+	if (clock.getElapsedTime().asSeconds() >= 1)
+	{
+		if (apples.size() > 0)
+		{
+			int lastAppleGravity = apples[apples.size() - 1].gravity;
+			int nextAppleGravity;
+
+			if (lastAppleGravity < Apple::maxGravity)
+				nextAppleGravity = lastAppleGravity + 5;
+
+			apples.push_back(Apple(textureManager.get("apple"), generatePositionForApple(), nextAppleGravity));
+		}
+		else
+			apples.push_back(Apple(textureManager.get("apple"), generatePositionForApple()));
+
+		clock.restart();
+	}
+
 	player.move(deltaTime);
 	for (auto &apple : apples)
 	{
@@ -121,6 +140,34 @@ void Game::render()
 	
 	window.display();
 }
+
+sf::Vector2f Game::generatePositionForApple()
+{
+	int positionX = generateNumber (walls["leftWall"].getSize().x,
+		window.getSize().x - walls["rightWall"].getSize().x - textureManager.get("apple").getSize().x);
+	Apple tmpApple(textureManager.get("apple"), sf::Vector2f(positionX, 0));
+	
+	for (const auto& apple : apples)
+	{
+		if (isCollision(tmpApple.getGlobalBounds(), apple.getGlobalBounds()))
+		{
+			generatePositionForApple();
+			break;
+		}
+	}
+	return sf::Vector2f(positionX, 0);
+}
+
+int Game::generateNumber(const int& min, const int& max)
+{
+	static std::random_device rd;
+	static std::mt19937 mt(rd());
+
+	std::uniform_int_distribution<int> dist(min, max);
+	return dist(mt);
+}
+
+
 
 void Game::reset()
 {

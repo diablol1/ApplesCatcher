@@ -5,6 +5,7 @@
 #include <map>
 #include <string>
 #include <vector>
+#include <random>
 
 #include "Player.h"
 #include "Apple.h"
@@ -36,6 +37,9 @@ private:
 	void detectCollisions();
 	bool isCollision(const sf::FloatRect& rect1, const sf::FloatRect& rect2) const;
 	void render();
+
+	sf::Vector2f generatePositionForApple();
+	int generateNumber(const int& min, const int& max);
 
 	void reset();
 };
