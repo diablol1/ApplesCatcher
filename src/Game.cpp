@@ -11,7 +11,6 @@ Game::Game() : window(sf::VideoMode(800, 600), "Apples Catcher"),
 	initWalls();
 	reset();
 
-	apples.push_back(Apple(textureManager.get("apple"), sf::Vector2f(90, 90)));
 	highScoreLabel.readFromFile("highscore.txt");
 }
 
@@ -71,17 +70,7 @@ void Game::update(const float &deltaTime)
 	static sf::Clock clock;
 	if (clock.getElapsedTime().asSeconds() >= 1)
 	{
-		if (!apples.empty())
-		{
-			int lastAppleGravity = apples[apples.size() - 1].gravity;
-			int nextAppleGravity;
-				nextAppleGravity = lastAppleGravity + 5;
-
-			apples.push_back(Apple(textureManager.get("apple"), generatePositionForApple(), nextAppleGravity));
-		}
-		else
-			apples.push_back(Apple(textureManager.get("apple"), generatePositionForApple()));
-
+		apples.push_back(Apple(textureManager.get("apple"), generatePositionForApple()));
 		clock.restart();
 	}
 
@@ -158,7 +147,7 @@ sf::Vector2f Game::generatePositionForApple()
 {
 	int positionX = generateNumber (walls["leftWall"].getSize().x,
 		window.getSize().x - walls["rightWall"].getSize().x - textureManager.get("apple").getSize().x);
-	Apple tmpApple(textureManager.get("apple"), sf::Vector2f(positionX, 0));
+	Apple tmpApple(textureManager.get("apple"), sf::Vector2f(positionX, 0), 0);
 	
 	for (const auto& apple : apples)
 	{
@@ -186,6 +175,8 @@ void Game::reset()
 {
 	if(apples.size() > 0)
 		apples.clear();
+
+	Apple::nextGravity = Apple::startingGravity;
 
 	player = Player (textureManager.get ("player"), sf::Vector2f (window.getSize().x / 2,
 		static_cast<float> (window.getSize().y) - textureManager.get ("player").getSize().y - walls["bottomWall"].getSize().y));

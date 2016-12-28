@@ -5,8 +5,10 @@
 class Apple : public sf::Transformable, public sf::Drawable
 {
 public:
-	const int gravity;
-	Apple(const sf::Texture& texture, const sf::Vector2f& position, const int& _gravity = 250);
+	static int nextGravity;
+	static const int startingGravity;
+	Apple(const sf::Texture& texture, const sf::Vector2f& position);
+	Apple(const sf::Texture& texture, const sf::Vector2f& position, const int& _gravity);
 
 	Apple & operator=(const Apple & object);
 
@@ -19,7 +21,7 @@ public:
 	}
 private:
 	sf::Sprite sprite;
-
+	int gravity;
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const {
 		states.transform *= getTransform();
 		target.draw(sprite, states);
