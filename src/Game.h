@@ -11,6 +11,7 @@
 #include "Apple.h"
 
 #include "CurrentScoreLabel.h"
+#include "HighScoreLabel.h"
 
 #include "TextureManager.h"
 
@@ -30,6 +31,7 @@ private:
 	Player player;
 
 	CurrentScoreLabel currentScoreLabel;
+	HighScoreLabel highScoreLabel;
 
 	TextureManager textureManager;
 

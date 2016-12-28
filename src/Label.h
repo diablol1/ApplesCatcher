@@ -6,13 +6,7 @@
 class Label : public sf::Drawable, public sf::Transformable
 {
 public:
-	Label(const std::string& _text, const unsigned int& characterSize, const sf::Vector2f& position)
-	{
-		font.loadFromFile("font.ttf"); //This font contains only uppercase letters
-		text = sf::Text(_text, font);
-		text.setCharacterSize(characterSize);
-		text.setPosition(position);
-	}
+	Label(const std::string& _text, const unsigned int& characterSize, const sf::Vector2f& position);
 protected:
 	sf::Font font;
 	sf::Text text;

@@ -1,8 +1,9 @@
 #include "Game.h"
 #include <iostream>
 
-Game::Game() : window(sf::VideoMode(800, 600), "Apples Catcher")
-	,currentScoreLabel("SCORE: 0", 30, sf::Vector2f(5, window.getSize().y - 35))
+Game::Game() : window(sf::VideoMode(800, 600), "Apples Catcher"),
+	currentScoreLabel("SCORE: 0", 30, sf::Vector2f(30, window.getSize().y - 35)),
+	highScoreLabel("HIGHSCORE: 0", 30, sf::Vector2f(window.getSize().x - 215, window.getSize().y - 35))
 {
 	loadTextures();
 	background.setTexture(textureManager.get("background"));
@@ -11,6 +12,7 @@ Game::Game() : window(sf::VideoMode(800, 600), "Apples Catcher")
 	reset();
 
 	apples.push_back(Apple(textureManager.get("apple"), sf::Vector2f(90, 90)));
+	highScoreLabel.readFromFile("highscore.txt");
 }
 
 void Game::loadTextures()
@@ -108,7 +110,14 @@ void Game::detectCollisions()
 	{
 		Apple oldestApple = apples[0];
 		if (isCollision(walls["bottomWall"].getGlobalBounds(), oldestApple.getGlobalBounds())) //Check game over
+		{
+			if (currentScoreLabel.score > highScoreLabel.score)
+			{
+				highScoreLabel.setScore(currentScoreLabel.score);
+				highScoreLabel.writeToFile("highscore.txt");
+			}
 			reset();
+		}
 		else if (isCollision(player.getGlobalBounds(), oldestApple.getGlobalBounds()))
 		{
 			apples.erase(apples.begin());
@@ -140,6 +149,7 @@ void Game::render()
 		window.draw(apple);
 	}
 	window.draw(currentScoreLabel);
+	window.draw(highScoreLabel);
 	
 	window.display();
 }
