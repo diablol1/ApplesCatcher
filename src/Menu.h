@@ -19,6 +19,7 @@ private:
 	int selectedOptionIndex;
 	sf::Font font;
 	sf::Text options[3];
+	sf::Text author;
 
 	sf::Sprite background;
 

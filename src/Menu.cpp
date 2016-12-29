@@ -4,7 +4,7 @@ const int Menu::numberOfOptions = 3;
 
 Menu::Menu(const sf::Vector2u & _windowResolution, TextureManager* _textureManager)
 {
-	if (!font.loadFromFile("font.ttf"))
+	if (!font.loadFromFile("data/font.ttf"))
 		printf("Font doesn't exist");
 
 	for (int i = 0; i < numberOfOptions; i++)
@@ -21,12 +21,17 @@ Menu::Menu(const sf::Vector2u & _windowResolution, TextureManager* _textureManag
 	options[2].setString("EXIT");
 
 	selectedOptionIndex = 0;
+
 	background.setTexture(_textureManager->get("background"));
+
+	author = sf::Text("AUTHOR: PATRYK \"DIABLOL\" KRAJEWSKI", font, 20);
+	author.setPosition(_windowResolution.x - 360, _windowResolution.y - 30);
 }
 
 void Menu::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
 	target.draw(background);
+	target.draw(author);
 	for (int i = 0; i < numberOfOptions; i++)
 	{
 		target.draw(options[i]);

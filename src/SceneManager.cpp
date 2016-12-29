@@ -13,7 +13,7 @@ SceneManager::SceneManager(const sf::Vector2u& _windowResolution) :
 	initWalls();
 	reset();
 
-	highScoreLabel.readFromFile("highscore.txt");
+	highScoreLabel.readFromFile("data/highscore");
 }
 
 void SceneManager::initWalls()
@@ -34,10 +34,10 @@ void SceneManager::initWalls()
 
 void SceneManager::loadTextures()
 {
-	textureManager.add("player", "sprites/hat.png");
-	textureManager.add("apple", "sprites/apple.png");
-	textureManager.add("background", "sprites/background.png");
-	textureManager.add("wall", "sprites/wall.jpg");
+	textureManager.add("player", "data/hat.png");
+	textureManager.add("apple", "data/apple.png");
+	textureManager.add("background", "data/background.png");
+	textureManager.add("wall", "data/wall.jpg");
 }
 
 void SceneManager::update(const float &deltaTime)
@@ -78,7 +78,7 @@ void SceneManager::detectCollisions()
 			if (currentScoreLabel.score > highScoreLabel.score)
 			{
 				highScoreLabel.setScore(currentScoreLabel.score);
-				highScoreLabel.writeToFile("highscore.txt");
+				highScoreLabel.writeToFile("data/highscore");
 			}
 			reset();
 		}
