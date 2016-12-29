@@ -13,9 +13,12 @@
 class SceneManager : public sf::Drawable
 {
 public:
+	TextureManager textureManager;
+
 	SceneManager(const sf::Vector2u& _windowResolution);
 
 	void update(const float& deltaTime);
+	void reset();
 private:
 	const sf::Vector2u WindowResolution;
 
@@ -28,8 +31,6 @@ private:
 	CurrentScoreLabel currentScoreLabel;
 	HighScoreLabel highScoreLabel;
 
-	TextureManager textureManager;
-
 	void loadTextures();
 	void initWalls();
 
@@ -38,8 +39,6 @@ private:
 
 	sf::Vector2f generatePositionForApple();
 	int generateNumber(const int& min, const int& max);
-
-	void reset();
 
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 };

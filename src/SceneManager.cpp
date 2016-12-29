@@ -82,10 +82,14 @@ void SceneManager::detectCollisions()
 			}
 			reset();
 		}
-		else if (isCollision(player.getGlobalBounds(), oldestApple.getGlobalBounds()))
+		for (const auto& apple : apples)
 		{
-			apples.erase(apples.begin());
-			currentScoreLabel++;
+			if (isCollision(apple.getGlobalBounds(), player.getGlobalBounds()))
+			{
+				currentScoreLabel++;
+				apples.erase(apples.begin());
+				break;
+			}
 		}
 	}
 }

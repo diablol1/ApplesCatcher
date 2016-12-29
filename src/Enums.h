@@ -1,4 +1,4 @@
-
+#pragma  once
 namespace cd
 {
 	enum CollisionDirections
@@ -8,5 +8,15 @@ namespace cd
 		RIGHT,
 		UP,
 		DOWN
+	};
+}
+
+namespace gs
+{
+	enum GameStates
+	{
+		PLAY,
+		MENU,
+		EXIT
 	};
 }
