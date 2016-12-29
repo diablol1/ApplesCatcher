@@ -2,28 +2,27 @@
 
 ##Movement:
 
-####-Left arrow
+-Left arrow
 
-####-Right arrow
+-Right arrow
 
 ##Installation
 
 ###Windows
 
-####Soon
+Soon
 
 ###Linux
 
 
-####Open terminal and enter these commands:
-#####1. git clone http://github.com/diablol1/ApplesCatcher
+Open terminal and enter these commands:
 
-#####2. cd ApplesCatcher
+1. git clone http://github.com/diablol1/ApplesCatcher
 
-#####3. sudo apt-get install libsfml-dev
+2. cd ApplesCatcher
 
-#####4. mkdir obj
+3. make setup
 
-#####4. make
+4. make
 
-#####5. ./ApplesCatcher
+5. ./ApplesCatcher
