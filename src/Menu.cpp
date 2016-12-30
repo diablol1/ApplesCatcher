@@ -1,6 +1,6 @@
 #include "Menu.h"
 
-const int Menu::numberOfOptions = 3;
+const int Menu::numberOfOptions = 4;
 
 Menu::Menu(const sf::Vector2u & _windowResolution, TextureManager* _textureManager)
 {
@@ -11,14 +11,15 @@ Menu::Menu(const sf::Vector2u & _windowResolution, TextureManager* _textureManag
 	{
 		options[i].setFont(font);
 		options[i].setFillColor(sf::Color::White);
-		options[i].setPosition(_windowResolution.x / 2 - 45, _windowResolution.y / 2 + i * 100 - 100);
+		options[i].setPosition(_windowResolution.x / 2 - 70, _windowResolution.y / 2 + i * 100 - 175);
 		options[i].setCharacterSize(50);
 	}
 	options[0].setFillColor(sf::Color::Yellow);
 
 	options[0].setString("PLAY");
 	options[1].setString("RESET");
-	options[2].setString("EXIT");
+	options[2].setString("MUSIC: ON");
+	options[3].setString("EXIT");
 
 	selectedOptionIndex = 0;
 

@@ -6,8 +6,7 @@ Game::Game() : window(sf::VideoMode(800, 600), "Apples Catcher"),
 	menu(window.getSize(), &sceneManager.textureManager),
 	gameState(gs::GameStates::MENU)
 {
-	if (!music.openFromFile("data/music.ogg"))
-		printf("File doesn't exist");
+	music.openFromFile("data/music.ogg");
 
 	music.setVolume(65);
 	music.setLoop(true);
@@ -68,6 +67,18 @@ void Game::processEvents()
 					gameState = gs::GameStates::PLAY;
 					break;
 				case 2:
+					if (music.getStatus() == sf::Music::Status::Playing)
+					{
+						music.stop();
+						menu.setStringForOption(2, "MUSIC: OFF");
+					}
+					else
+					{
+						music.play();
+						menu.setStringForOption(2, "MUSIC: ON");
+					}
+					break;
+				case 3:
 					gameState = gs::GameStates::EXIT;
 					break;
 				}

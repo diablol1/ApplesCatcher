@@ -12,8 +12,6 @@ void HighScoreLabel::readFromFile(const std::string& fileName)
 		score = std::stoi(ss.str());
 		text.setString("HIGH SCORE: " + std::to_string(score));
 	}
-	else
-		std::cout << fileName << " doesn't exist";
 }
 
 void HighScoreLabel::writeToFile(const std::string& fileName)
@@ -24,8 +22,6 @@ void HighScoreLabel::writeToFile(const std::string& fileName)
 		file << score;
 		file.close();
 	}
-	else
-		std::cout << fileName << " doesn't exist";
 }
 
 void HighScoreLabel::setScore(int _score)

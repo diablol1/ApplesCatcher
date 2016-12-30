@@ -14,11 +14,14 @@ public:
 	void moveUp();
 	void moveDown();
 	int getPressedOptionIndex();
+	void setStringForOption(const int & optionIndex, const std::string & text) {
+		options[optionIndex].setString(text);
+	}
 private:
 	static const int numberOfOptions;
 	int selectedOptionIndex;
 	sf::Font font;
-	sf::Text options[3];
+	sf::Text options[4];
 	sf::Text author;
 
 	sf::Sprite background;
