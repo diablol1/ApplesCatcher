@@ -2,10 +2,16 @@
 #include "Game.h"
 
 Game::Game() : window(sf::VideoMode(800, 600), "Apples Catcher"),
-	sceneManager(window.getSize()),
+	sceneManager(window.getSize(), &soundManager),
 	menu(window.getSize(), &sceneManager.textureManager),
 	gameState(gs::GameStates::MENU)
-{}
+{
+	if (!music.openFromFile("data/music.ogg"))
+		printf("File doesn't exist");
+
+	music.setLoop(true);
+	music.play();
+}
 
 void Game::start()
 {
@@ -40,14 +46,17 @@ void Game::processEvents()
 			switch (event.key.code)
 			{
 			case sf::Keyboard::Up:
+				soundManager.play("menuMove");
 				menu.moveUp();
 				break;
 
 			case sf::Keyboard::Down:
+				soundManager.play("menuMove");
 				menu.moveDown();
 				break;
 
 			case sf::Keyboard::Return:
+				soundManager.play("menuSelect");
 				switch (menu.getPressedOptionIndex())
 				{
 				case 0:

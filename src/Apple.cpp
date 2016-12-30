@@ -11,7 +11,6 @@ Apple::Apple(const sf::Texture& texture, const sf::Vector2f& position)
 	
 	nextGravity += 10;
 	gravity = nextGravity;
-	std::cout << gravity << std::endl;
 }
 
 Apple::Apple(const sf::Texture & texture, const sf::Vector2f & position, const int & _gravity)

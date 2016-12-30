@@ -1,7 +1,7 @@
 #include "SceneManager.h"
 
 
-SceneManager::SceneManager(const sf::Vector2u& _windowResolution) :
+SceneManager::SceneManager(const sf::Vector2u& _windowResolution, SoundManager* _soundManager) :
 	currentScoreLabel("SCORE: 0", 30, sf::Vector2f(30, WindowResolution.y - 35)),
 	highScoreLabel("HIGHSCORE: 0", 30, sf::Vector2f(WindowResolution.x - 215, WindowResolution.y - 35)),
 	WindowResolution(_windowResolution)
@@ -14,6 +14,8 @@ SceneManager::SceneManager(const sf::Vector2u& _windowResolution) :
 	reset();
 
 	highScoreLabel.readFromFile("data/highscore");
+
+	soundManager = _soundManager;
 }
 
 void SceneManager::initWalls()
@@ -76,6 +78,7 @@ void SceneManager::detectCollisions()
 		{
 			if (isCollision(walls["bottomWall"].getGlobalBounds(), apple.getGlobalBounds())) //Check game over
 			{
+				soundManager->play("fail");
 				if (currentScoreLabel.score > highScoreLabel.score)
 				{
 					highScoreLabel.setScore(currentScoreLabel.score);
@@ -92,6 +95,7 @@ void SceneManager::detectCollisions()
 			{
 				apples.erase(it);
 				currentScoreLabel++;
+				soundManager->play("appleCatch");
 				break;
 			}
 		}

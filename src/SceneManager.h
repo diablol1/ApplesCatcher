@@ -7,6 +7,7 @@
 
 #include "Player.h"
 #include "TextureManager.h"
+#include "SoundManager.h"
 #include "Apple.h"
 #include "CurrentScoreLabel.h"
 #include "HighScoreLabel.h"
@@ -15,8 +16,9 @@ class SceneManager : public sf::Drawable
 {
 public:
 	TextureManager textureManager;
+	SoundManager *soundManager;
 
-	SceneManager(const sf::Vector2u& _windowResolution);
+	SceneManager(const sf::Vector2u& _windowResolution, SoundManager* _soundManager);
 
 	void update(const float& deltaTime);
 	void reset();
@@ -31,6 +33,9 @@ private:
 
 	CurrentScoreLabel currentScoreLabel;
 	HighScoreLabel highScoreLabel;
+
+	sf::SoundBuffer catchSoundEffectBuffer;
+	sf::Sound catchSoundEffect;
 
 	void loadTextures();
 	void initWalls();
