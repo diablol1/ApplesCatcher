@@ -72,22 +72,26 @@ void SceneManager::detectCollisions()
 
 	if (!apples.empty())
 	{
-		Apple oldestApple = apples[0];
-		if (isCollision(walls["bottomWall"].getGlobalBounds(), oldestApple.getGlobalBounds())) //Check game over
-		{
-			if (currentScoreLabel.score > highScoreLabel.score)
-			{
-				highScoreLabel.setScore(currentScoreLabel.score);
-				highScoreLabel.writeToFile("data/highscore");
-			}
-			reset();
-		}
 		for (const auto& apple : apples)
 		{
-			if (isCollision(apple.getGlobalBounds(), player.getGlobalBounds()))
+			if (isCollision(walls["bottomWall"].getGlobalBounds(), apple.getGlobalBounds())) //Check game over
 			{
+				if (currentScoreLabel.score > highScoreLabel.score)
+				{
+					highScoreLabel.setScore(currentScoreLabel.score);
+					highScoreLabel.writeToFile("data/highscore");
+				}
+				reset();
+				break;
+			}
+		}
+		
+		for (std::list<Apple>::iterator it = apples.begin(); it != apples.end(); it++)
+		{
+			if (isCollision(it->getGlobalBounds(), player.getGlobalBounds()))
+			{
+				apples.erase(it);
 				currentScoreLabel++;
-				apples.erase(apples.begin());
 				break;
 			}
 		}

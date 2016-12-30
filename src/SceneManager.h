@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 
 #include <random>
+#include <list>
 
 #include "Player.h"
 #include "TextureManager.h"
@@ -25,7 +26,7 @@ private:
 	sf::Sprite background;
 
 	Player player;
-	std::vector<Apple>apples;
+	std::list<Apple>apples;
 	std::map<std::string, sf::RectangleShape> walls;
 
 	CurrentScoreLabel currentScoreLabel;

@@ -70,12 +70,15 @@ void Game::processEvents()
 			break;
 
 		}
-
-		else if (gameState == gs::GameStates::PLAY &&
-			event.type == sf::Event::KeyReleased &&
-			event.key.code == sf::Keyboard::Escape)
+		else if (gameState == gs::GameStates::PLAY)
 		{
-			gameState = gs::GameStates::MENU;
+			if (event.type == sf::Event::KeyReleased &&
+				event.key.code == sf::Keyboard::Escape)
+			{
+				gameState = gs::GameStates::MENU;
+			}
+			else if (event.type == sf::Event::LostFocus)
+				gameState = gs::GameStates::MENU;
 		}
 			
 	}
