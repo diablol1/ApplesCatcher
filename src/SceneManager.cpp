@@ -1,7 +1,9 @@
 #include "SceneManager.h"
 
 
-SceneManager::SceneManager(const sf::Vector2u& _windowResolution, SoundManager* _soundManager) :
+SceneManager::SceneManager(const sf::Vector2u& _windowResolution, 
+	SoundManager* _soundManager, gs::GameStates* _gameState) :
+
 	currentScoreLabel("SCORE: 0", 30, sf::Vector2f(30, WindowResolution.y - 35)),
 	highScoreLabel("HIGHSCORE: 0", 30, sf::Vector2f(WindowResolution.x - 215, WindowResolution.y - 35)),
 	WindowResolution(_windowResolution)
@@ -16,6 +18,7 @@ SceneManager::SceneManager(const sf::Vector2u& _windowResolution, SoundManager* 
 	highScoreLabel.readFromFile("data/highscore");
 
 	soundManager = _soundManager;
+	gameState = _gameState;
 }
 
 void SceneManager::initWalls()
@@ -84,6 +87,7 @@ void SceneManager::detectCollisions()
 					highScoreLabel.setScore(currentScoreLabel.score);
 					highScoreLabel.writeToFile("data/highscore");
 				}
+				*gameState = gs::GameStates::MENU;
 				reset();
 				break;
 			}

@@ -2,13 +2,14 @@
 #include "Game.h"
 
 Game::Game() : window(sf::VideoMode(800, 600), "Apples Catcher"),
-	sceneManager(window.getSize(), &soundManager),
+	sceneManager(window.getSize(), &soundManager, &gameState),
 	menu(window.getSize(), &sceneManager.textureManager),
 	gameState(gs::GameStates::MENU)
 {
 	if (!music.openFromFile("data/music.ogg"))
 		printf("File doesn't exist");
 
+	music.setVolume(65);
 	music.setLoop(true);
 	music.play();
 }

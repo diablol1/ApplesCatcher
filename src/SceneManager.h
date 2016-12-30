@@ -17,8 +17,9 @@ class SceneManager : public sf::Drawable
 public:
 	TextureManager textureManager;
 	SoundManager *soundManager;
+	gs::GameStates* gameState;
 
-	SceneManager(const sf::Vector2u& _windowResolution, SoundManager* _soundManager);
+	SceneManager(const sf::Vector2u& _windowResolution, SoundManager* _soundManager, gs::GameStates* _gameState);
 
 	void update(const float& deltaTime);
 	void reset();
