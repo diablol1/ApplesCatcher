@@ -111,7 +111,7 @@ sf::Vector2f SceneManager::generatePositionForApple()
 {
 	int positionX = generateNumber(walls["leftWall"].getSize().x,
 		WindowResolution.x - walls["rightWall"].getSize().x - textureManager->get("apple").getSize().x);
-	Apple tmpApple(textureManager->get("apple"), sf::Vector2f(positionX, 0), 0);
+	Apple tmpApple(textureManager->get("apple"), sf::Vector2f(positionX, textureManager->get("apple").getSize().y), 0);
 
 	for (const auto& apple : apples)
 	{
