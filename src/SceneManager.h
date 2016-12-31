@@ -15,11 +15,14 @@
 class SceneManager : public sf::Drawable
 {
 public:
-	TextureManager textureManager;
-	SoundManager *soundManager;
+	TextureManager* textureManager;
+	SoundManager* soundManager;
 	gs::GameStates* gameState;
 
-	SceneManager(const sf::Vector2u& _windowResolution, SoundManager* _soundManager, gs::GameStates* _gameState);
+	SceneManager(const sf::Vector2u& _windowResolution,
+		gs::GameStates* _gameState,
+		TextureManager* _textureManager,
+		SoundManager* _soundManager);
 
 	void update(const float& deltaTime);
 	void reset();
@@ -38,7 +41,6 @@ private:
 	sf::SoundBuffer catchSoundEffectBuffer;
 	sf::Sound catchSoundEffect;
 
-	void loadTextures();
 	void initWalls();
 
 	void detectCollisions();

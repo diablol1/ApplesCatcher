@@ -13,7 +13,9 @@ public:
 
 	void moveUp();
 	void moveDown();
-	int getPressedOptionIndex();
+	int getPressedOptionIndex() {
+		return selectedOptionIndex;
+	}
 	void setStringForOption(const int & optionIndex, const std::string & text) {
 		options[optionIndex].setString(text);
 	}

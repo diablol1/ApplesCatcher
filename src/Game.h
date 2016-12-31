@@ -14,6 +14,7 @@ public:
 	void start();
 
 private:
+	TextureManager textureManager;
 	SoundManager soundManager;
 	sf::Music music;
 

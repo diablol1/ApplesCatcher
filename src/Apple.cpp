@@ -17,6 +17,7 @@ Apple::Apple(const sf::Texture & texture, const sf::Vector2f & position, const i
 {
 	sprite.setTexture(texture);
 	sprite.setPosition(position);
+	gravity = _gravity;
 }
 
 Apple & Apple::operator=(const Apple & object)

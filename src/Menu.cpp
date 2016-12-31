@@ -4,8 +4,7 @@ const int Menu::numberOfOptions = 4;
 
 Menu::Menu(const sf::Vector2u & _windowResolution, TextureManager* _textureManager)
 {
-	if (!font.loadFromFile("data/font.ttf"))
-		printf("Font doesn't exist");
+	font.loadFromFile("data/font.ttf");
 
 	for (int i = 0; i < numberOfOptions; i++)
 	{
@@ -57,9 +56,4 @@ void Menu::moveDown()
 		selectedOptionIndex++;
 		options[selectedOptionIndex].setFillColor(sf::Color::Yellow);
 	}
-}
-
-int Menu::getPressedOptionIndex()
-{
-	return selectedOptionIndex;
 }

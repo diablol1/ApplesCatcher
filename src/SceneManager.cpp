@@ -1,24 +1,25 @@
 #include "SceneManager.h"
 
 
-SceneManager::SceneManager(const sf::Vector2u& _windowResolution, 
-	SoundManager* _soundManager, gs::GameStates* _gameState) :
+SceneManager::SceneManager(
+	const sf::Vector2u& _windowResolution,
+	gs::GameStates* _gameState,
+	TextureManager* _textureManager,
+	SoundManager* _soundManager) :
 
 	currentScoreLabel("SCORE: 0", 30, sf::Vector2f(30, WindowResolution.y - 35)),
 	highScoreLabel("HIGHSCORE: 0", 30, sf::Vector2f(WindowResolution.x - 215, WindowResolution.y - 35)),
-	WindowResolution(_windowResolution)
+	WindowResolution(_windowResolution),
+	gameState(_gameState),
+	textureManager(_textureManager),
+	soundManager(_soundManager)
 {
-	std::cout << WindowResolution.x << std::endl << WindowResolution.y << std::endl;
-	loadTextures();
-	background.setTexture(textureManager.get("background"));
+	background.setTexture(textureManager->get("background"));
 
 	initWalls();
 	reset();
 
 	highScoreLabel.readFromFile("data/highscore");
-
-	soundManager = _soundManager;
-	gameState = _gameState;
 }
 
 void SceneManager::initWalls()
@@ -33,16 +34,8 @@ void SceneManager::initWalls()
 
 	for (auto &wall : walls)
 	{
-		wall.second.setTexture(&textureManager.get("wall"));
+		wall.second.setTexture(&textureManager->get("wall"));
 	}
-}
-
-void SceneManager::loadTextures()
-{
-	textureManager.add("player", "data/hat.png");
-	textureManager.add("apple", "data/apple.png");
-	textureManager.add("background", "data/background.png");
-	textureManager.add("wall", "data/wall.jpg");
 }
 
 void SceneManager::update(const float &deltaTime)
@@ -50,7 +43,7 @@ void SceneManager::update(const float &deltaTime)
 	static sf::Clock clock;
 	if (clock.getElapsedTime().asSeconds() >= 1)
 	{
-		apples.push_back(Apple(textureManager.get("apple"), generatePositionForApple()));
+		apples.push_back(Apple(textureManager->get("apple"), generatePositionForApple()));
 		clock.restart();
 	}
 
@@ -117,8 +110,8 @@ bool SceneManager::isCollision(const sf::FloatRect& rect1, const sf::FloatRect& 
 sf::Vector2f SceneManager::generatePositionForApple()
 {
 	int positionX = generateNumber(walls["leftWall"].getSize().x,
-		WindowResolution.x - walls["rightWall"].getSize().x - textureManager.get("apple").getSize().x);
-	Apple tmpApple(textureManager.get("apple"), sf::Vector2f(positionX, 0), 0);
+		WindowResolution.x - walls["rightWall"].getSize().x - textureManager->get("apple").getSize().x);
+	Apple tmpApple(textureManager->get("apple"), sf::Vector2f(positionX, 0), 0);
 
 	for (const auto& apple : apples)
 	{
@@ -164,8 +157,8 @@ void SceneManager::reset()
 
 	Apple::nextGravity = Apple::startingGravity;
 
-	player = Player(textureManager.get("player"), sf::Vector2f(WindowResolution.x / 2,
-		static_cast<float> (WindowResolution.y) - textureManager.get("player").getSize().y - walls["bottomWall"].getSize().y));
+	player = Player(textureManager->get("player"), sf::Vector2f(WindowResolution.x / 2,
+		static_cast<float> (WindowResolution.y) - textureManager->get("player").getSize().y - walls["bottomWall"].getSize().y));
 
 	currentScoreLabel.reset();
 }

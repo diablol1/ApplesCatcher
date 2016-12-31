@@ -24,5 +24,4 @@ void SoundManager::loadSounds()
 	loadFromFile("menuMove", "data/sounds/menuMove.ogg");
 	loadFromFile("menuSelect", "data/sounds/menuSelect.ogg");
 	loadFromFile("fail", "data/sounds/fail.ogg");
-
 }
