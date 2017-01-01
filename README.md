@@ -10,7 +10,9 @@
 
 ###Windows
 
-Soon
+1. Go to <a href="https://github.com/diablol1/ApplesCatcher/releases">releases</a>
+2. Download ApplesCatcher.zip
+3. Extract it and play
 
 ###Linux
 
