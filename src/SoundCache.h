@@ -6,10 +6,10 @@
 #include <map>
 
 
-class SoundManager
+class SoundCache
 {
 public:
-	SoundManager();
+	SoundCache();
 
 	void play(const std::string& name);
 private:

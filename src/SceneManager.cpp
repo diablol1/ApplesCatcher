@@ -4,17 +4,17 @@
 SceneManager::SceneManager(
 	const sf::Vector2u& _windowResolution,
 	gs::GameStates* _gameState,
-	TextureManager* _textureManager,
-	SoundManager* _soundManager) :
+	TextureCache* _textureCache,
+	SoundCache* _soundCache) :
 
 	currentScoreLabel("SCORE: 0", 30, sf::Vector2f(30, WindowResolution.y - 35)),
 	highScoreLabel("HIGHSCORE: 0", 30, sf::Vector2f(WindowResolution.x - 215, WindowResolution.y - 35)),
 	WindowResolution(_windowResolution),
 	gameState(_gameState),
-	textureManager(_textureManager),
-	soundManager(_soundManager)
+	textureCache(_textureCache),
+	soundCache(_soundCache)
 {
-	background.setTexture(textureManager->get("background"));
+	background.setTexture(textureCache->get("background"));
 
 	initWalls();
 	reset();
@@ -34,7 +34,7 @@ void SceneManager::initWalls()
 
 	for (auto &wall : walls)
 	{
-		wall.second.setTexture(&textureManager->get("wall"));
+		wall.second.setTexture(&textureCache->get("wall"));
 	}
 }
 
@@ -43,7 +43,7 @@ void SceneManager::update(const float &deltaTime)
 	static sf::Clock clock;
 	if (clock.getElapsedTime().asSeconds() >= 1)
 	{
-		apples.push_back(Apple(textureManager->get("apple"), generatePositionForApple()));
+		apples.push_back(Apple(textureCache->get("apple"), generatePositionForApple()));
 		clock.restart();
 	}
 
@@ -74,7 +74,7 @@ void SceneManager::detectCollisions()
 		{
 			if (isCollision(walls["bottomWall"].getGlobalBounds(), apple.getGlobalBounds())) //Check game over
 			{
-				soundManager->play("fail");
+				soundCache->play("fail");
 				if (currentScoreLabel.score > highScoreLabel.score)
 				{
 					highScoreLabel.setScore(currentScoreLabel.score);
@@ -92,7 +92,7 @@ void SceneManager::detectCollisions()
 			{
 				apples.erase(it);
 				currentScoreLabel++;
-				soundManager->play("appleCatch");
+				soundCache->play("appleCatch");
 				break;
 			}
 		}
@@ -110,8 +110,8 @@ bool SceneManager::isCollision(const sf::FloatRect& rect1, const sf::FloatRect& 
 sf::Vector2f SceneManager::generatePositionForApple()
 {
 	int positionX = generateNumber(walls["leftWall"].getSize().x,
-		WindowResolution.x - walls["rightWall"].getSize().x - textureManager->get("apple").getSize().x);
-	Apple tmpApple(textureManager->get("apple"), sf::Vector2f(positionX, textureManager->get("apple").getSize().y), 0);
+		WindowResolution.x - walls["rightWall"].getSize().x - textureCache->get("apple").getSize().x);
+	Apple tmpApple(textureCache->get("apple"), sf::Vector2f(positionX, textureCache->get("apple").getSize().y), 0);
 
 	for (const auto& apple : apples)
 	{
@@ -157,8 +157,8 @@ void SceneManager::reset()
 
 	Apple::nextGravity = Apple::startingGravity;
 
-	player = Player(textureManager->get("player"), sf::Vector2f(WindowResolution.x / 2,
-		static_cast<float> (WindowResolution.y) - textureManager->get("player").getSize().y - walls["bottomWall"].getSize().y));
+	player = Player(textureCache->get("player"), sf::Vector2f(WindowResolution.x / 2,
+		static_cast<float> (WindowResolution.y) - textureCache->get("player").getSize().y - walls["bottomWall"].getSize().y));
 
 	currentScoreLabel.reset();
 }

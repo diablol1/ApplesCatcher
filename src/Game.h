@@ -1,7 +1,7 @@
 #pragma once
 
 #include "SceneManager.h"
-#include "SoundManager.h"
+#include "SoundCache.h"
 #include "Menu.h"
 #include "Enums.h"
 
@@ -14,8 +14,8 @@ public:
 	void start();
 
 private:
-	TextureManager textureManager;
-	SoundManager soundManager;
+	TextureCache textureCache;
+	SoundCache soundCache;
 	sf::Music music;
 
 	gs::GameStates gameState;

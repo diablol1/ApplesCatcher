@@ -6,8 +6,8 @@
 #include <list>
 
 #include "Player.h"
-#include "TextureManager.h"
-#include "SoundManager.h"
+#include "TextureCache.h"
+#include "SoundCache.h"
 #include "Apple.h"
 #include "CurrentScoreLabel.h"
 #include "HighScoreLabel.h"
@@ -15,14 +15,14 @@
 class SceneManager : public sf::Drawable
 {
 public:
-	TextureManager* textureManager;
-	SoundManager* soundManager;
+	TextureCache *textureCache;
+	SoundCache *soundCache;
 	gs::GameStates* gameState;
 
 	SceneManager(const sf::Vector2u& _windowResolution,
 		gs::GameStates* _gameState,
-		TextureManager* _textureManager,
-		SoundManager* _soundManager);
+		TextureCache* _textureCache,
+		SoundCache* _soundCache);
 
 	void update(const float& deltaTime);
 	void reset();
@@ -37,9 +37,6 @@ private:
 
 	CurrentScoreLabel currentScoreLabel;
 	HighScoreLabel highScoreLabel;
-
-	sf::SoundBuffer catchSoundEffectBuffer;
-	sf::Sound catchSoundEffect;
 
 	void initWalls();
 

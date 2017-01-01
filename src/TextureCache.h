@@ -1,14 +1,14 @@
 #pragma once
 
-#include <iostream>
+#include <string>
 #include <map>
 #include <SFML/Graphics.hpp>
 
 
-class TextureManager
+class TextureCache
 {
 public:
-	TextureManager() {
+	TextureCache() {
 		loadTextures();
 	}
 	sf::Texture& get(const std::string& name) {

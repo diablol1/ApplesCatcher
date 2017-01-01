@@ -1,24 +1,24 @@
 #pragma once
 
-#include "SoundManager.h"
+#include "SoundCache.h"
 
-SoundManager::SoundManager()
+SoundCache::SoundCache()
 {
 	loadSounds();
 }
 
-void SoundManager::play(const std::string & name)
+void SoundCache::play(const std::string & name)
 {
 	sounds[name].play();
 }
 
-void SoundManager::loadFromFile(const std::string& name, const std::string& file)
+void SoundCache::loadFromFile(const std::string& name, const std::string& file)
 {
 	soundBuffers[name].loadFromFile(file);
 	sounds[name].setBuffer(soundBuffers[name]);
 }
 
-void SoundManager::loadSounds()
+void SoundCache::loadSounds()
 {
 	loadFromFile("appleCatch", "data/sounds/appleCatch.ogg");
 	loadFromFile("menuMove", "data/sounds/menuMove.ogg");

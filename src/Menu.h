@@ -2,14 +2,15 @@
 
 #include <SFML/Graphics.hpp>
 #include <map>
+#include <array>
 
 #include "Label.h"
-#include "TextureManager.h"
+#include "TextureCache.h"
 
 class Menu : public sf::Drawable
 {
 public:
-	Menu(const sf::Vector2u& _windowResolution, TextureManager* _textureManager);
+	Menu(const sf::Vector2u& _windowResolution, TextureCache* _textureManager);
 
 	void moveUp();
 	void moveDown();
@@ -23,7 +24,7 @@ private:
 	static const int numberOfOptions;
 	int selectedOptionIndex;
 	sf::Font font;
-	sf::Text options[4];
+	std::array<sf::Text, 4> options;
 	sf::Text author;
 
 	sf::Sprite background;

@@ -1,12 +1,11 @@
 #include "Menu.h"
 
-const int Menu::numberOfOptions = 4;
 
-Menu::Menu(const sf::Vector2u & _windowResolution, TextureManager* _textureManager)
+Menu::Menu(const sf::Vector2u & _windowResolution, TextureCache* _textureCache)
 {
 	font.loadFromFile("data/font.ttf");
 
-	for (int i = 0; i < numberOfOptions; i++)
+	for (int i = 0; i < options.size(); i++)
 	{
 		options[i].setFont(font);
 		options[i].setFillColor(sf::Color::White);
@@ -22,7 +21,7 @@ Menu::Menu(const sf::Vector2u & _windowResolution, TextureManager* _textureManag
 
 	selectedOptionIndex = 0;
 
-	background.setTexture(_textureManager->get("background"));
+	background.setTexture(_textureCache->get("background"));
 
 	author = sf::Text("AUTHOR: PATRYK \"DIABLOL\" KRAJEWSKI", font, 20);
 	author.setPosition(_windowResolution.x - 360, _windowResolution.y - 30);
@@ -32,7 +31,7 @@ void Menu::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
 	target.draw(background);
 	target.draw(author);
-	for (int i = 0; i < numberOfOptions; i++)
+	for (int i = 0; i < options.size(); i++)
 	{
 		target.draw(options[i]);
 	}
@@ -50,7 +49,7 @@ void Menu::moveUp()
 
 void Menu::moveDown()
 {
-	if (selectedOptionIndex + 1 < numberOfOptions)
+	if (selectedOptionIndex + 1 < options.size())
 	{
 		options[selectedOptionIndex].setFillColor(sf::Color::White);
 		selectedOptionIndex++;

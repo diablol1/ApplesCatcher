@@ -1,7 +1,7 @@
 #pragma  once
 namespace cd
 {
-	enum CollisionDirections
+	enum class CollisionDirections
 	{
 		ANY,
 		LEFT,
@@ -13,7 +13,7 @@ namespace cd
 
 namespace gs
 {
-	enum GameStates
+	enum class GameStates
 	{
 		PLAY,
 		MENU,

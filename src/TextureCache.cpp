@@ -1,6 +1,6 @@
-#include "TextureManager.h"
+#include "TextureCache.h"
 
-bool TextureManager::loadFromFile(const std::string& _name, const std::string & _path)
+bool TextureCache::loadFromFile(const std::string& _name, const std::string & _path)
 {
 	sf::Texture tmpTexture;
 	tmpTexture.loadFromFile(_path);
@@ -31,7 +31,7 @@ bool TextureManager::loadFromFile(const std::string& _name, const std::string & 
 	return true;
 }
 
-void TextureManager::loadTextures()
+void TextureCache::loadTextures()
 {
 	loadFromFile("player", "data/textures/hat.png");
 	loadFromFile("apple", "data/textures/apple.png");
