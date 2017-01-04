@@ -3,7 +3,7 @@ LINKER = g++
 COMPILER_PARAMS = -std=c++11
 LINKER_PARAMS = -lsfml-graphics -lsfml-window -lsfml-audio -lsfml-system
 
-OBJS = obj/main.o obj/Apple.o obj/CurrentScoreLabel.o obj/Game.o obj/HighScoreLabel.o obj/Label.o obj/Player.o obj/SceneManager.o obj/TextureManager.o obj/Menu.o obj/SoundManager.o
+OBJS = obj/main.o obj/Apple.o obj/CurrentScoreLabel.o obj/Game.o obj/HighScoreLabel.o obj/Label.o obj/Player.o obj/SceneManager.o obj/TextureCache.o obj/Menu.o obj/SoundCache.o
 
 all: ApplesCatcher
 

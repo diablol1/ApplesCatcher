@@ -14,6 +14,8 @@ public:
 	void start();
 
 private:
+	static const sf::Time splashScreenDisplayTime;
+
 	TextureCache textureCache;
 	SoundCache soundCache;
 	sf::Music music;
@@ -21,6 +23,7 @@ private:
 	gs::GameStates gameState;
 	sf::RenderWindow window;
 
+	sf::Sprite splashScreenSprite;
 	SceneManager sceneManager;
 	Menu menu;
 	

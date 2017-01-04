@@ -37,4 +37,5 @@ void TextureCache::loadTextures()
 	loadFromFile("apple", "data/textures/apple.png");
 	loadFromFile("background", "data/textures/background.png");
 	loadFromFile("wall", "data/textures/wall.jpg");
+	loadFromFile("splashScreen", "data/textures/splashScreen.jpg");
 }

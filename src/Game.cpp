@@ -1,14 +1,16 @@
 
 #include "Game.h"
 
+const sf::Time Game::splashScreenDisplayTime(sf::Time(sf::seconds(1)));
 
-Game::Game() : window(sf::VideoMode(800, 600), "Apples Catcher"),
+Game::Game() :
+	window(sf::VideoMode(800, 600), "Apples Catcher"),
 	sceneManager(window.getSize(), &gameState, &textureCache, &soundCache),
 	menu(window.getSize(), &textureCache),
-	gameState(gs::GameStates::MENU)
+	gameState(gs::GameStates::SPLASH_SCREEN)
 {
+	splashScreenSprite.setTexture(textureCache.get("splashScreen"));
 	music.openFromFile("data/music.ogg");
-
 	music.setVolume(65);
 	music.setLoop(true);
 	music.play();
@@ -26,8 +28,16 @@ void Game::start()
 			sceneManager.update(deltaTime);
 			clock.restart();
 		}
+		else if (gameState == gs::GameStates::SPLASH_SCREEN)
+		{
+			static sf::Clock ssDisplayingClock;
+			if (ssDisplayingClock.getElapsedTime() >= splashScreenDisplayTime)
+			{
+				ssDisplayingClock.restart();
+				gameState = gs::GameStates::MENU;
+			}
+		}
 		render();
-
 	}
 	window.close();
 }
@@ -113,8 +123,9 @@ void Game::render()
 
 	if (gameState == gs::GameStates::PLAY)
 		window.draw(sceneManager);
-	else
+	else if (gameState == gs::GameStates::MENU)
 		window.draw(menu);
-
+	else
+		window.draw(splashScreenSprite);
 	window.display();
 }
