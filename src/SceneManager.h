@@ -22,7 +22,8 @@ public:
 	SceneManager(const sf::Vector2u& _windowResolution,
 		gs::GameStates* _gameState,
 		TextureCache* _textureCache,
-		SoundCache* _soundCache);
+		SoundCache* _soundCache,
+		const sf::Font& font);
 
 	void update(const float& deltaTime);
 	void reset();

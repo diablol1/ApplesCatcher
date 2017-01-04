@@ -5,10 +5,11 @@ SceneManager::SceneManager(
 	const sf::Vector2u& _windowResolution,
 	gs::GameStates* _gameState,
 	TextureCache* _textureCache,
-	SoundCache* _soundCache) :
+	SoundCache* _soundCache,
+	const sf::Font &font) :
 
-	currentScoreLabel("SCORE: 0", 30, sf::Vector2f(30, WindowResolution.y - 35)),
-	highScoreLabel("HIGHSCORE: 0", 30, sf::Vector2f(WindowResolution.x - 215, WindowResolution.y - 35)),
+	currentScoreLabel("SCORE: 0", 30, sf::Vector2f(30, WindowResolution.y - 35), font),
+	highScoreLabel("HIGHSCORE: 0", 30, sf::Vector2f(WindowResolution.x - 215, WindowResolution.y - 35), font),
 	WindowResolution(_windowResolution),
 	gameState(_gameState),
 	textureCache(_textureCache),

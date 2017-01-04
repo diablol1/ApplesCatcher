@@ -5,11 +5,14 @@ const sf::Time Game::splashScreenDisplayTime(sf::Time(sf::seconds(1)));
 
 Game::Game() :
 	window(sf::VideoMode(800, 600), "Apples Catcher"),
-	sceneManager(window.getSize(), &gameState, &textureCache, &soundCache),
-	menu(window.getSize(), &textureCache),
+	sceneManager(window.getSize(), &gameState, &textureCache, &soundCache, font),
+	menu(window.getSize(), &textureCache, font),
 	gameState(gs::GameStates::SPLASH_SCREEN)
 {
+	font.loadFromFile("data/font.ttf");
+
 	splashScreenSprite.setTexture(textureCache.get("splashScreen"));
+
 	music.openFromFile("data/music.ogg");
 	music.setVolume(65);
 	music.setLoop(true);

@@ -1,8 +1,7 @@
 #include "Label.h"
 
-Label::Label(const std::string& _text, const unsigned int& characterSize, const sf::Vector2f& position)
+Label::Label(const std::string& _text, const int& characterSize, const sf::Vector2f& position, const sf::Font& font)
 {
-	font.loadFromFile("data/font.ttf"); //This font contains only uppercase letters
 	text = sf::Text(_text, font);
 	text.setCharacterSize(characterSize);
 	text.setPosition(position);

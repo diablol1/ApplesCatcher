@@ -10,7 +10,7 @@
 class Menu : public sf::Drawable
 {
 public:
-	Menu(const sf::Vector2u& _windowResolution, TextureCache* _textureManager);
+	Menu(const sf::Vector2u& _windowResolution, TextureCache* _textureManager, const sf::Font &font);
 
 	void moveUp();
 	void moveDown();
@@ -23,7 +23,6 @@ public:
 private:
 	static const int numberOfOptions;
 	int selectedOptionIndex;
-	sf::Font font;
 	std::array<sf::Text, 4> options;
 	sf::Text author;
 

@@ -16,6 +16,8 @@ public:
 private:
 	static const sf::Time splashScreenDisplayTime;
 
+	sf::Font font;
+
 	TextureCache textureCache;
 	SoundCache soundCache;
 	sf::Music music;

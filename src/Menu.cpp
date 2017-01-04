@@ -1,9 +1,8 @@
 #include "Menu.h"
 
 
-Menu::Menu(const sf::Vector2u & _windowResolution, TextureCache* _textureCache)
+Menu::Menu(const sf::Vector2u & _windowResolution, TextureCache* _textureCache, const sf::Font& font)
 {
-	font.loadFromFile("data/font.ttf");
 
 	for (int i = 0; i < options.size(); i++)
 	{
